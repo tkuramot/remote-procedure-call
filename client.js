@@ -26,6 +26,9 @@ class Client {
     write(data) {
         this.__socket.write(data);
     }
+    destroy() {
+        this.__socket.destroy();
+    }
 }
 
 data = [
@@ -61,9 +64,7 @@ data = [
     }
 ]
 
-client = new Client(socket_path);
 for(let i = 0; i < data.length; i++) {
-    setTimeout(() => {
-        client.write(JSON.stringify(data[i]));
-    }, i * 1000);
+    let client = new Client(socket_path);
+    client.write(JSON.stringify(data[i]));
 }

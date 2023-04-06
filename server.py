@@ -37,14 +37,14 @@ class Server:
     def recv(self, connection):
         try:
             while True:
-                print("-----------")
                 data = connection.recv(self.__buffer)
                 self.respond(connection, data.decode())
         except:
             pass
 
     def respond(self, connection, data:str) -> str:
-        print("receiving -> ", data)
+        if data:
+            print("receiving -> ", data)
         # str型のデータをjson(dict型)にキャストして渡す
         response = JsonProcessor.process(json.loads(data))
         print("sending -> ", response)
